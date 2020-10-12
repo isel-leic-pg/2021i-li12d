@@ -11,3 +11,13 @@
 
 ## Week 2
 ### 12/10/2020 - The programmer's universe (introduction)
+
+John Backus, [here](https://dl.acm.org/doi/pdf/10.1145/359576.359579)
+> Underlying every programming language is a model
+> of a computing system that its programs control.
+
+* Tecnhology stacks and programming models
+
+![A tech stack](assets/tech_stack.png "A tech stack")
+
+### 14/10/2020 - Representations
