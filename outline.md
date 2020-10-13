@@ -15,7 +15,8 @@ For reference:
 ### 12/10/2020 - The programmer's universe (introduction)
 
 > Underlying every programming language is a model
-> of a computing system that its programs control.
+> of a computing system that its programs control.   
+
 by John Backus, [here](https://dl.acm.org/doi/pdf/10.1145/359576.359579)
 
 * Tecnhology stacks and programming models
