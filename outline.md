@@ -40,4 +40,4 @@ For reference:
     * [Data classes](https://kotlinlang.org/docs/reference/data-classes.html)
   
 For reference:
-* [Lecture video (in Portuguese)](#week-2)
+* [Lecture video (in Portuguese)](https://www.youtube.com/watch?v=nobgBEA2oP8&list=PL8XxoCaL3dBgXjxTLx4Fm-uxTD8k-cXQA&index=3)
