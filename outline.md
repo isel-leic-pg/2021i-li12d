@@ -41,3 +41,20 @@ For reference:
   
 For reference:
 * [Lecture video (in Portuguese)](https://www.youtube.com/watch?v=nobgBEA2oP8&list=PL8XxoCaL3dBgXjxTLx4Fm-uxTD8k-cXQA&index=3)
+
+### 19/10/2020 - Representations, continued
+* Kotlin's type system, continued
+  * [Data classes](https://kotlinlang.org/docs/reference/data-classes.html)
+    * Default construction parameters
+    * Named arguments
+    * [Parameters and arguments](https://en.wikipedia.org/wiki/Parameter_(computer_programming)#Parameters_and_arguments) (a.k.a. _formal_ parameters and _actual parameters_)
+  * Strings, revisited
+    * String templates and string concatenation
+* Immutability
+  * A simplified mental model for representations
+  * The substitution model of evaluation
+
+For reference:
+* [Lecture video (in Portuguese)](#19102020---representations-continued)
+
+### 21/10/2020 - Behavior, introduction (_coming soon_)
