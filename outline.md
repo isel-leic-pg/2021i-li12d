@@ -57,4 +57,9 @@ For reference:
 For reference:
 * [Lecture video (in Portuguese)]([#19102020---representations-continued](https://www.youtube.com/watch?v=YELdO0TZEhM&list=PL8XxoCaL3dBgXjxTLx4Fm-uxTD8k-cXQA&index=4))
 
-### 21/10/2020 - Behavior, introduction (_coming soon_)
+### 21/10/2020 - Setup
+* Setting up the development environment
+
+For reference:
+* [Lecture video (in Portuguese)](#21102020---setup)
+
