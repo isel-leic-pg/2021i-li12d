@@ -55,11 +55,23 @@ For reference:
   * The substitution model of evaluation
 
 For reference:
-* [Lecture video (in Portuguese)]([#19102020---representations-continued](https://www.youtube.com/watch?v=YELdO0TZEhM&list=PL8XxoCaL3dBgXjxTLx4Fm-uxTD8k-cXQA&index=4))
+* [Lecture video (in Portuguese)](https://www.youtube.com/watch?v=YELdO0TZEhM&list=PL8XxoCaL3dBgXjxTLx4Fm-uxTD8k-cXQA&index=4)
 
 ### 21/10/2020 - Setup
 * Setting up the development environment
 
 For reference:
-* [Lecture video (in Portuguese)](#21102020---setup)
+* [Lecture video (in Portuguese)](https://www.youtube.com/watch?v=GZWstPijzxA&list=PL8XxoCaL3dBgXjxTLx4Fm-uxTD8k-cXQA&index=5)
 
+### 26/10/2020 - Behaviour
+* Elements of code reuse and code organization
+  * Functions as
+    * Pure functions
+    * Effects
+* Mental model for execution
+  * The substitution model of evaluation
+  * Program order vs execution order
+
+For reference:
+* [Lecture video (in Portuguese)](#26102020---behaviour)
+* [Code used to draw an explosion (a red circle) where the mouse is pressed](https://gist.github.com/palbp/d0f43caa85b21d8e91d09e03e9a0c5ab)
