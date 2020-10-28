@@ -73,5 +73,27 @@ For reference:
   * Program order vs execution order
 
 For reference:
-* [Lecture video (in Portuguese)](#26102020---behaviour)
+* [Lecture video (in Portuguese)](https://www.youtube.com/watch?v=1uH6NwxSHEo&list=PL8XxoCaL3dBgXjxTLx4Fm-uxTD8k-cXQA&index=6)
 * [Code used to draw an explosion (a red circle) where the mouse is pressed](https://gist.github.com/palbp/d0f43caa85b21d8e91d09e03e9a0c5ab)
+
+### 28/10/2020 - Putting it all together
+* Representations and behaviour, coming together
+  * Behaviour
+    * Conditional expressions
+      * `if else`
+    * Functions, revisited
+      * Named parameters
+      * Default parameters
+      * __Composing__ functions with functions (i.e. functions that call other functions)
+    * Repetition, introduction
+      * Expressing repetition using `canvas.setInterval`
+* Representations
+  * Primitive types, revisited
+    * Implicit and explicit type conversions
+  * Introduction to mutations 
+    * `var` vs `val`
+    * Imposing a discipline on mutations (for now, only admissible in the main function for keeping track)
+  
+For reference:
+* [Lecture video (in Portuguese)](#28102020---putting-it-all-together)
+* [Code used to draw a growing explosion](https://gist.github.com/palbp/1d7bff47e83ce68e2c3f098c23b16092)
