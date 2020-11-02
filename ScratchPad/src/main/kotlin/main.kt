@@ -1,38 +1,34 @@
 import pt.isel.canvas.*
 
-data class Location(val x: Int, val y: Int)
-data class Explosion(val center: Location, val radius: Double, val rate: Double)
-
-fun fromExplosionWithNewRadius(explosion: Explosion, newRadius: Double) =
-        Explosion(center = explosion.center, newRadius, rate = explosion.rate)
-
-fun expandUntil(explosion: Explosion, maxRadius: Double): Explosion =
-        if (explosion.radius >= maxRadius) explosion
-        else fromExplosionWithNewRadius(explosion, newRadius = explosion.radius * explosion.rate)
-
-fun contractUntilZero(explosion: Explosion) =
-        if (explosion.radius <= 0) explosion
-        else fromExplosionWithNewRadius(explosion, newRadius = explosion.radius * explosion.rate)
-
-
-fun drawExplosion(canvas: Canvas, explosion: Explosion) {
-    canvas.drawCircle(explosion.center.x, explosion.center.y, explosion.radius.toInt(), RED)
-}
-
 fun main() {
 
     onStart {
         val canvas = Canvas(width = 800, height = 600)
+        var explosion = Explosion(Location(x = 0.0, y = 0.0), radius = 0.0, rate = 0.0)
 
-        var explosion = Explosion(Location(canvas.width / 2, canvas.height / 2), radius = 5.0, rate = 1.03)
-        drawExplosion(canvas, explosion)
+        canvas.onMouseDown {
+            explosion = Explosion(center = Location(it.x.toDouble(), it.y.toDouble()), radius = 5.0, rate = 1.06)
+        }
+
+        val missile = Missile(
+                start = Location(100.0, 0.0),
+                current = Location(canvas.width / 2.0, canvas.height / 2.0),
+                Velocity(0.0, 0.0)
+        )
 
         canvas.onTimeProgress(period = 25) {
-            val newExplosion = TODO()
-            explosion = if (newExplosion != explosion) newExplosion else TODO()
+
+            val newExplosion =
+                    if (explosion.rate > 1.0) expandUntil(explosion, maxRadius = 50.0)
+                    else contractUntilZero(explosion)
+
+            explosion =
+                    if (newExplosion == explosion) Explosion(newExplosion.center, newExplosion.radius, rate = 0.94)
+                    else newExplosion
 
             canvas.erase()
             drawExplosion(canvas, explosion)
+            drawMissile(canvas, missile)
         }
     }
 
