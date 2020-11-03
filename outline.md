@@ -100,7 +100,9 @@ For reference:
 
 ### 02/11/2020 - Coding session 
 * Goal: Let's start to build our version of [Missile Command](https://en.wikipedia.org/wiki/Missile_Command)
-* Using [CanvasLib](https://2021moodle.isel.pt/pluginfile.php/989212/mod_resource/content/1/CanvasLib.pdf)
+* Using CanvasLib
+  * [Documentation](https://github.com/CCISEL/CanvasLib/blob/master/docs/CanvasLib.pdf)
+  * [Implementation on GitHub](https://github.com/CCISEL/CanvasLib)
 
 For reference:
 * [Lecture video (in Portuguese)](#02112020---coding-session)
