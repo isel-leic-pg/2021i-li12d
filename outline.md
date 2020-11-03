@@ -92,8 +92,31 @@ For reference:
     * Implicit and explicit type conversions
   * Introduction to mutations 
     * `var` vs `val`
-    * Imposing a discipline on mutations (for now, only admissible in the main function for keeping track)
+    * Imposing a discipline on mutations (for now, only admissible in the main function)
   
 For reference:
-* [Lecture video (in Portuguese)](#28102020---putting-it-all-together)
+* [Lecture video (in Portuguese)](https://www.youtube.com/watch?v=-S2WHawYf0c&list=PL8XxoCaL3dBgXjxTLx4Fm-uxTD8k-cXQA&index=7)
 * [Code used to draw a growing explosion](https://gist.github.com/palbp/1d7bff47e83ce68e2c3f098c23b16092)
+
+### 02/11/2020 - Coding session 
+* Goal: Let's start to build our version of [Missile Command](https://en.wikipedia.org/wiki/Missile_Command)
+* Using [CanvasLib](https://2021moodle.isel.pt/pluginfile.php/989212/mod_resource/content/1/CanvasLib.pdf)
+
+For reference:
+* [Lecture video (in Portuguese)](#02112020---coding-session)
+* [Coding challenge solution](https://gist.github.com/palbp/6b3766d45f5cec89877ff12e0bd0da1e)
+* [Gist of the Code written during the session](https://gist.github.com/palbp/94ab93113c69d12e44dcef9d99231b31)
+
+### 04/11/2020 - Coding session (preview)
+* Goal: Let's continue to build our version of [Missile Command](https://en.wikipedia.org/wiki/Missile_Command)
+* Setting up our MissileCommand project
+  * Importing code from GitHub
+* Representations, continued
+  * Representing colors through RGB encoding
+  * An introduction to numerical bases
+    * Binary and hexadecimal
+* Behaviour, continued
+  * Extension functions
+
+For reference:
+* [Lecture video (in Portuguese)](#02112020---coding-session)
