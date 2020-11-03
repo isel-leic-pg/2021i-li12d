@@ -1,5 +1,42 @@
 import pt.isel.canvas.*
 
+data class Location(val x: Double, val y: Double)
+data class Explosion(val center: Location, val radius: Double, val rate: Double)
+
+data class Missile(val start: Location, val current: Location, val velocity: Velocity)
+data class Velocity(val dx: Double, val dy: Double)
+
+fun fromExplosionWithNewRadius(explosion: Explosion, newRadius: Double) =
+        Explosion(center = explosion.center, newRadius, rate = explosion.rate)
+
+fun expandUntil(explosion: Explosion, maxRadius: Double): Explosion =
+        if (explosion.radius >= maxRadius) explosion
+        else fromExplosionWithNewRadius(explosion, newRadius = explosion.radius * explosion.rate)
+
+fun contractUntilZero(explosion: Explosion) =
+        if (explosion.radius <= 0) explosion
+        else fromExplosionWithNewRadius(explosion, newRadius = explosion.radius * explosion.rate)
+
+fun drawExplosion(canvas: Canvas, explosion: Explosion) {
+    canvas.drawCircle(
+            explosion.center.x.toInt(),
+            explosion.center.y.toInt(),
+            explosion.radius.toInt(),
+            RED
+    )
+}
+
+fun drawMissile(canvas: Canvas, missile: Missile) {
+    canvas.drawLine(
+            missile.start.x.toInt(),
+            missile.start.y.toInt(),
+            missile.current.x.toInt(),
+            missile.current.y.toInt(),
+            RED,
+            3
+    )
+}
+
 fun main() {
 
     onStart {
