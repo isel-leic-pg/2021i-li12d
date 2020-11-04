@@ -105,7 +105,7 @@ For reference:
   * [Implementation on GitHub](https://github.com/CCISEL/CanvasLib)
 
 For reference:
-* [Lecture video (in Portuguese)](#02112020---coding-session)
+* [Lecture video (in Portuguese)](https://www.youtube.com/watch?v=VocpJ9qoP4Q&list=PL8XxoCaL3dBgXjxTLx4Fm-uxTD8k-cXQA&index=8)
 * [Coding challenge solution](https://gist.github.com/palbp/6b3766d45f5cec89877ff12e0bd0da1e)
 * [Gist of the Code written during the session](https://gist.github.com/palbp/94ab93113c69d12e44dcef9d99231b31)
 
@@ -118,7 +118,8 @@ For reference:
   * An introduction to numerical bases
     * Binary and hexadecimal
 * Behaviour, continued
-  * Extension functions
+  * Conditional evaluation
+    * `when` expression [documentation](https://kotlinlang.org/docs/reference/control-flow.html#when-expression)
 
 For reference:
 * [Lecture video (in Portuguese)](#02112020---coding-session)
