@@ -1,6 +1,8 @@
 /**
  * Represents explosions at a given time instant.
  *
+ * TODO: Explosion color sequence is: branco, amarelo, magenta, vermelho, cyan, verde, azul escuro, preto
+ *
  * @property center     the explosion's center
  * @property radius     the eplosion's current radius
  * @property rate       the explosion's changing rate (i.e. >= 1.0, it is growing)

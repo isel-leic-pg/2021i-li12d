@@ -4,10 +4,16 @@ fun main() {
 
     onStart {
         val canvas = Canvas(width = 800, height = 600, BLACK)
-        var explosion = Explosion(Location(x = 0.0, y = 0.0), radius = 0.0, rate = 0.0)
+        var explosionView: ExplosionView = ExplosionView(
+                Explosion(Location(x = 0.0, y = 0.0), radius = 0.0, rate = 0.0),
+                RED
+        )
 
         canvas.onMouseDown {
-            explosion = Explosion(center = Location(it.x.toDouble(), it.y.toDouble()), radius = 5.0, rate = 1.06)
+            explosionView = ExplosionView(
+                    Explosion(center = Location(it.x.toDouble(), it.y.toDouble()), radius = 5.0, rate = 1.06),
+                    RED
+            )
         }
 
         val missile = Missile(
@@ -18,17 +24,20 @@ fun main() {
 
         canvas.onTimeProgress(period = 25) {
 
-            val newExplosion =
-                if (explosion.rate > 1.0) expandUntil(explosion, maxRadius = 50.0)
-                else contractUntilZero(explosion)
+            val maybeNewExplosion: Explosion =
+                if (explosionView.data.rate > 1.0) expandUntil(explosionView.data, maxRadius = 50.0)
+                else contractUntilZero(explosionView.data)
 
-            explosion =
-                if (newExplosion == explosion) Explosion(newExplosion.center, newExplosion.radius, rate = 0.94)
-                else newExplosion
+            val newExplosion =
+                if (maybeNewExplosion == explosionView.data)
+                    Explosion(maybeNewExplosion.center, maybeNewExplosion.radius, rate = 0.94)
+                else maybeNewExplosion
+
+            explosionView = ExplosionView(newExplosion, explosionView.color)
 
             canvas.erase()
-            drawExplosion(canvas, explosion)
-            drawMissile(canvas, missile)
+            drawExplosion(canvas, explosionView)
+            drawMissile(canvas, missile, RED)
         }
     }
 
