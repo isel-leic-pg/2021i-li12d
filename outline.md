@@ -109,7 +109,7 @@ For reference:
 * [Coding challenge solution](https://gist.github.com/palbp/6b3766d45f5cec89877ff12e0bd0da1e)
 * [Gist of the Code written during the session](https://gist.github.com/palbp/94ab93113c69d12e44dcef9d99231b31)
 
-### 04/11/2020 - Coding session (preview)
+### 04/11/2020 - Representations and behaviour, revisited
 * Goal: Let's continue to build our version of [Missile Command](https://en.wikipedia.org/wiki/Missile_Command)
 * Setting up our MissileCommand project
   * Importing code from GitHub
@@ -122,4 +122,11 @@ For reference:
     * `when` expression [documentation](https://kotlinlang.org/docs/reference/control-flow.html#when-expression)
 
 For reference:
-* [Lecture video (in Portuguese)](#02112020---coding-session)
+* [Lecture video (in Portuguese)](https://www.youtube.com/watch?v=u0_1uoC6u74&list=PL8XxoCaL3dBgXjxTLx4Fm-uxTD8k-cXQA&index=9)
+
+### 09/11/2020 - Practical class
+* Practical class dedicated to the development of the first project assignement (the requirements are [here](assets/trab1Pg2021.pdf), in Portuguese)
+
+### 11/11/2020 - Practical class
+* Practical class dedicated to the development of the first project assignement (the requirements are [here](assets/trab1Pg2021.pdf), in Portuguese)
+
