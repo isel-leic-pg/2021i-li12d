@@ -130,3 +130,8 @@ For reference:
 ### 11/11/2020 - Practical class
 * Practical class dedicated to the development of the first project assignement (the requirements are [here](assets/trab1Pg2021.pdf), in Portuguese)
 
+### 16/11/2020 - Coding session (subjects' review)
+* Review of the most important subjects thusfar
+
+For reference:
+* [Lecture video (in Portuguese)](#16112020---coding-session)
