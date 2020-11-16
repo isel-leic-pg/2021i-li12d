@@ -1,23 +1,27 @@
 import pt.isel.canvas.Canvas
 
-data class ExplosionView(val data: Explosion, val color: Int)
+fun drawWorld(canvas: Canvas, world: World) {
+    canvas.erase()
+    drawExplosion(canvas, world.explosion)
+    drawMissile(canvas, world.missile)
+}
 
-fun drawExplosion(canvas: Canvas, explosion: ExplosionView) {
+private fun drawExplosion(canvas: Canvas, explosion: Explosion) {
     canvas.drawCircle(
-        explosion.data.center.x.toInt(),
-        explosion.data.center.y.toInt(),
-        explosion.data.radius.toInt(),
+        explosion.center.x.toInt(),
+        explosion.center.y.toInt(),
+        explosion.radius.toInt(),
         explosion.color
     )
 }
 
-fun drawMissile(canvas: Canvas, missile: Missile, color: Int) {
+private fun drawMissile(canvas: Canvas, missile: Missile) {
     canvas.drawLine(
         missile.start.x.toInt(),
         missile.start.y.toInt(),
         missile.current.x.toInt(),
         missile.current.y.toInt(),
-        color,
+        missile.color,
         3
     )
 }
