@@ -4,7 +4,8 @@ fun drawWorld(canvas: Canvas, world: World) {
     canvas.erase()
     if (world.explosion != null)
         drawExplosion(canvas, world.explosion)
-    drawMissile(canvas, world.missile)
+    if (world.missile != null)
+        drawMissile(canvas, world.missile)
 }
 
 private fun drawExplosion(canvas: Canvas, explosion: Explosion) {

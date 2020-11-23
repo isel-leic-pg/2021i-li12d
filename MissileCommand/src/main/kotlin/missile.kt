@@ -14,3 +14,9 @@ data class Missile(
         val velocity: Velocity = Velocity(0.0, 0.0),
         val color: Int = RED
 )
+
+fun createMissile(worldWidth: Int, worldHeight: Int, dmzMargin: Int): Missile {
+    val entry = Location((dmzMargin .. worldWidth - dmzMargin).random().toDouble(), 0.0)
+    val target = Location((dmzMargin .. worldWidth - dmzMargin).random().toDouble(), worldHeight.toDouble())
+    return Missile(entry, entry, computeVelocity(entry, target))
+}
