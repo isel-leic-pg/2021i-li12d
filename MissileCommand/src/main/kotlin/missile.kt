@@ -1,4 +1,6 @@
 import pt.isel.canvas.RED
+import kotlin.math.pow
+import kotlin.math.sqrt
 
 /**
  * Represents enemy missiles.
@@ -15,8 +17,28 @@ data class Missile(
         val color: Int = RED
 )
 
+/**
+ * Computes the normalized vector specified by the difference between [start] and [end].
+ *
+ * @param start the start point
+ * @param end   the end point
+ * @return the normalized vector expressed as a [Velocity]
+ */
+private fun computeNormalizedVelocity(start: Location, end: Location): Velocity {
+    val magnitude = sqrt(start.x.pow(2) + start.y.pow(2))
+    return Velocity((end.x - start.x) / magnitude, (end.y - start.y) / magnitude)
+}
+
+/**
+ * Creates a new missile with the specified constraints
+ *
+ * @param worldHeight   The width of the world
+ * @param worldHeight   The height of the world
+ * @param dmzMargin     The width of the demilitarized zone (where no missiles will fall)
+ * @return the newly created missile
+ */
 fun createMissile(worldWidth: Int, worldHeight: Int, dmzMargin: Int): Missile {
     val entry = Location((dmzMargin .. worldWidth - dmzMargin).random().toDouble(), 0.0)
     val target = Location((dmzMargin .. worldWidth - dmzMargin).random().toDouble(), worldHeight.toDouble())
-    return Missile(entry, entry, computeVelocity(entry, target))
+    return Missile(entry, entry, computeNormalizedVelocity(entry, target))
 }

@@ -3,12 +3,13 @@ const val WORLD_WIDTH = 800
 const val WORLD_HEIGHT = 600
 
 /**
- * Representation od the game world
+ * Representation of the game world.
  */
 data class World(
         val missile: Missile? = null,
         val explosion: Explosion? = null
 )
+
 
 fun detectCollision(world: World, missile: Missile): Boolean {
     return if (world.explosion != null) {
@@ -19,10 +20,12 @@ fun detectCollision(world: World, missile: Missile): Boolean {
 /**
  * Computes the new world based on the given one.
  *
- * @param   world   The current [World] instance
- * @return  The new [World] instance
+ * @param world The current [World] instance
+ * @return The new [World] instance
  */
 fun computeNextWorld(world: World): World {
+
+    // TODO: (4) Refactor to extract functions like evolveExplosion, revertExplosionRate and moveMissile
 
     val newExplosion: Explosion? = when {
         world.explosion == null -> null

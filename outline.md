@@ -133,5 +133,34 @@ For reference:
 ### 16/11/2020 - Coding session (subjects' review)
 * Review of the most important subjects thusfar
 
+### 18/11/2020 - Kotlin type's system, revisited
+* [Nullable types](https://kotlinlang.org/docs/reference/null-safety.html)
+  * Motivation and consequences
+  * Smart casts
+  * Safe call operator
+  * Elvis operator
+
 For reference:
-* [Lecture video (in Portuguese)](#16112020---coding-session)
+* [Lecture video (in Portuguese)](https://www.youtube.com/watch?v=iFTEmryDOqE&list=PL8XxoCaL3dBgXjxTLx4Fm-uxTD8k-cXQA&index=11)
+
+### 23/11/2020 - Higher Order Functions, introduction
+* [Functions](https://kotlinlang.org/docs/reference/functions.html)
+  * Global functions
+  * Local functions
+* [Functions as values: Higher Order Functions (HOF)](https://kotlinlang.org/docs/reference/lambdas.html)
+  * Function types
+  * Lambda expressions
+  * Function references: operator `::`
+
+For reference:
+* [Lecture video (in Portuguese)](https://www.youtube.com/watch?v=-_13jOIuyv4&list=PL8XxoCaL3dBgXjxTLx4Fm-uxTD8k-cXQA&index=12)
+
+### 25/11/2020 - Collections: imutable lists
+* Imutable lists
+  * Motivation
+  * Properties
+* Expressing repetition through internal iteration: `forEach`
+* List transformation operations: `filter`, `map`, `reduce` and `fold`
+ 
+For reference:
+* [Lecture video (in Portuguese)](#25112020---collections-imutable-lists)

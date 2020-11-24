@@ -33,13 +33,14 @@ data class Explosion(
 fun fromExplosionWithNewRadius(explosion: Explosion, newRadius: Double) =
         Explosion(center = explosion.center, newRadius, rate = explosion.rate, explosion.color)
 
-
+// TODO: (2) Rewrite so that the explosion rate is applied if the predicate evaluates to true
+//  and rename to maybeApplyExplosionRate
 private fun applyExplosionRate(explosion: Explosion, predicate: (Explosion) -> Boolean): Explosion {
     return if(predicate(explosion)) explosion
     else fromExplosionWithNewRadius(explosion, newRadius = explosion.radius * explosion.rate)
 }
 
-
+// TODO: (3) Rewrite both functions and document them
 fun expandUntil(explosion: Explosion, maxRadius: Double): Explosion {
     val condition: (Explosion) -> Boolean = { explosion: Explosion -> explosion.radius >= maxRadius }
     return applyExplosionRate(explosion, condition)
