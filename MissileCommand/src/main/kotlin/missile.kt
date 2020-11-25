@@ -42,3 +42,15 @@ fun createMissile(worldWidth: Int, worldHeight: Int, dmzMargin: Int): Missile {
     val target = Location((dmzMargin .. worldWidth - dmzMargin).random().toDouble(), worldHeight.toDouble())
     return Missile(entry, entry, computeNormalizedVelocity(entry, target))
 }
+
+/**
+ * Moves the given missile.
+ *
+ * @param missile the missile to be moved.
+ * @return the new missile instance.
+ */
+fun moveMissile(missile: Missile) = Missile(
+        missile.start,
+        add(missile.current, missile.velocity),
+        missile.velocity
+)

@@ -58,7 +58,7 @@ private fun maybeApplyExplosionRate(explosion: Explosion, predicate: Predicate) 
  * @param maxRadius the maximum radius
  * @return the new explosion if the maximum radius hasn't yet been reached.
  */
-fun expandUntil(explosion: Explosion, maxRadius: Double): Explosion {
+private fun expandUntil(explosion: Explosion, maxRadius: Double): Explosion {
     val condition: Predicate = { explosion: Explosion -> explosion.radius < maxRadius }
     return maybeApplyExplosionRate(explosion, condition)
 }
@@ -69,4 +69,32 @@ fun expandUntil(explosion: Explosion, maxRadius: Double): Explosion {
  * @param explosion the explosion to be tentatively contracts
  * @return the new explosion if the minimum radius has not yet been reached.
  */
-fun contractUntilZero(explosion: Explosion) = maybeApplyExplosionRate(explosion) { it.radius > 0 }
+private fun contractUntilZero(explosion: Explosion) = maybeApplyExplosionRate(explosion) { it.radius > 0 }
+
+/**
+ * Reverts the given explosion's rate, that is, it is expanding and we make it contract.
+ *
+ * @param explosion the explosion
+ * @return the new reverted explosion
+ */
+private fun revertExplosionRate(explosion: Explosion) =
+        Explosion(explosion.center, explosion.radius, SHRINK_RATE, explosion.color)
+
+/**
+ * Makes the explosion evolve, if it exists.
+ *
+ * @param explosion the explosion, if it exists
+ * @return the new evolved explosion, or null
+ */
+fun evolveExplosion(explosion: Explosion?): Explosion? {
+
+    val newExplosion = when {
+        explosion == null -> null
+        explosion.rate == GROWTH_RATE -> expandUntil(explosion, MAX_RADIUS)
+        else -> contractUntilZero(explosion)
+    }
+
+    return if (newExplosion == null || newExplosion != explosion) newExplosion
+    else revertExplosionRate(newExplosion)
+}
+
