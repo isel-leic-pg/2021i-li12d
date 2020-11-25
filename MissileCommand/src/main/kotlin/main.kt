@@ -9,15 +9,10 @@ fun main() {
         var world = World(createMissile(WORLD_WIDTH, WORLD_HEIGHT, MARGIN))
 
         canvas.onMouseDown {
-            // TODO: (6) Refactor to extract function addExplosionToWorld
-            world = World(
-                    world.missile,
-                    Explosion(Location(it.x.toDouble(), it.y.toDouble()))
-            )
+            world = addExplosionToWorld(world, Location(it.x.toDouble(), it.y.toDouble()))
         }
 
         canvas.onTimeProgress(period = 25) {
-            // Apply time passing to the world
             world = computeNextWorld(world)
             drawWorld(canvas, world)
         }

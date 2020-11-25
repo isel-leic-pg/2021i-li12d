@@ -29,10 +29,10 @@ fun distance(l1: Location, l2: Location) =
 
 /**
  * Adds to [start] the displacement expressed by [velocity].
+ *
  * @param start     the starting location
  * @param velocity  the displacement to be added (implicitly a velocity, in our model)
  * @return the new location
  */
-// TODO: (1) Rename to add
-fun move(start: Location, velocity: Velocity) =
+fun add(start: Location, velocity: Velocity) =
         Location(start.x + velocity.dx, start.y + velocity.dy)

@@ -33,18 +33,40 @@ data class Explosion(
 fun fromExplosionWithNewRadius(explosion: Explosion, newRadius: Double) =
         Explosion(center = explosion.center, newRadius, rate = explosion.rate, explosion.color)
 
-// TODO: (2) Rewrite so that the explosion rate is applied if the predicate evaluates to true
-//  and rename to maybeApplyExplosionRate
-private fun applyExplosionRate(explosion: Explosion, predicate: (Explosion) -> Boolean): Explosion {
-    return if(predicate(explosion)) explosion
-    else fromExplosionWithNewRadius(explosion, newRadius = explosion.radius * explosion.rate)
-}
+/**
+ * Convenience type alias for predicates.
+ */
+private typealias Predicate = (Explosion) -> Boolean
 
-// TODO: (3) Rewrite both functions and document them
+/**
+ * Makes the explosion vary according to its explosion rate if the given predicate evaluates to true.
+ *
+ * @param explosion the explosion to be evolved
+ * @param predicate the predicate that is evaluated and, if true, mandates the explosion variation
+ * @return the new explosion if the predicate evaluates to true.
+ */
+private fun maybeApplyExplosionRate(explosion: Explosion, predicate: Predicate) =
+    if(predicate(explosion))
+        fromExplosionWithNewRadius(explosion, newRadius = explosion.radius * explosion.rate)
+    else
+        explosion
+
+/**
+ * Conditionally expands the explosion if it hasn't reached the maximum radius
+ *
+ * @param explosion the explosion to be tentatively expanded
+ * @param maxRadius the maximum radius
+ * @return the new explosion if the maximum radius hasn't yet been reached.
+ */
 fun expandUntil(explosion: Explosion, maxRadius: Double): Explosion {
-    val condition: (Explosion) -> Boolean = { explosion: Explosion -> explosion.radius >= maxRadius }
-    return applyExplosionRate(explosion, condition)
+    val condition: Predicate = { explosion: Explosion -> explosion.radius < maxRadius }
+    return maybeApplyExplosionRate(explosion, condition)
 }
 
-fun contractUntilZero(explosion: Explosion) =
-        applyExplosionRate(explosion) { it.radius <= 0 }
+/**
+ * Conditionally contracts the explosion if it hasn't reached the maximum radius
+ *
+ * @param explosion the explosion to be tentatively contracts
+ * @return the new explosion if the minimum radius has not yet been reached.
+ */
+fun contractUntilZero(explosion: Explosion) = maybeApplyExplosionRate(explosion) { it.radius > 0 }

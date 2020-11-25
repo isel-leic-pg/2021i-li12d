@@ -10,6 +10,14 @@ data class World(
         val explosion: Explosion? = null
 )
 
+/**
+ * Adds the explosion to the world.
+ *
+ * @param world     the world instance
+ * @param location  the location of the new explosion
+ * @return the new world instance
+ */
+fun addExplosionToWorld(world: World, location: Location) = World(world.missile, Explosion(location))
 
 fun detectCollision(world: World, missile: Missile): Boolean {
     return if (world.explosion != null) {
@@ -36,7 +44,7 @@ fun computeNextWorld(world: World): World {
     val newMissile = if (world.missile != null && !detectCollision(world, world.missile)) {
             Missile(
                     world.missile.start,
-                    move(world.missile.current, world.missile.velocity),
+                    add(world.missile.current, world.missile.velocity),
                     world.missile.velocity
             )
         }
