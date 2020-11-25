@@ -9,8 +9,8 @@ fun drawWorld(canvas: Canvas, world: World) {
     canvas.erase()
     if (world.explosion != null)
         drawExplosion(canvas, world.explosion)
-    if (world.missile != null)
-        drawMissile(canvas, world.missile)
+
+    world.missiles.forEach { drawMissile(canvas, it) }
 }
 
 /**

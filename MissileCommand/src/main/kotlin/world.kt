@@ -6,7 +6,7 @@ const val WORLD_HEIGHT = 600
  * Representation of the game world.
  */
 data class World(
-        val missile: Missile? = null,
+        val missiles: List<Missile> = listOf(),
         val explosion: Explosion? = null
 )
 
@@ -17,11 +17,15 @@ data class World(
  * @param location  the location of the new explosion
  * @return the new world instance
  */
-fun addExplosionToWorld(world: World, location: Location) = World(world.missile, Explosion(location))
+fun addExplosionToWorld(world: World, location: Location) = World(world.missiles, Explosion(location))
 
-fun detectCollision(world: World, missile: Missile) =
-    if (world.explosion != null)
-        distance(world.explosion.center, missile.current) < world.explosion.radius
+fun computeNextMissiles(missiles: List<Missile>, explosion: Explosion?): List<Missile> {
+    return missiles.filter { !detectCollision(explosion, it) }.map { moveMissile(it) }
+}
+
+fun detectCollision(explosion: Explosion?, missile: Missile) =
+    if (explosion != null)
+        distance(explosion.center, missile.current) < explosion.radius
     else false
 
 /**
@@ -33,10 +37,7 @@ fun detectCollision(world: World, missile: Missile) =
 fun computeNextWorld(world: World): World {
 
     val newExplosion: Explosion? = evolveExplosion(world.explosion)
+    val newMissiles: List<Missile> = computeNextMissiles(world.missiles, world.explosion)
 
-    val newMissile = if (world.missile != null && !detectCollision(world, world.missile))
-            moveMissile(world.missile)
-        else null
-
-    return World(newMissile, newExplosion)
+    return World(newMissiles, newExplosion)
 }
