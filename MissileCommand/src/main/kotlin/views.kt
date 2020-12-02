@@ -33,6 +33,7 @@ private fun drawExplosion(canvas: Canvas, explosion: Explosion) {
  * @param missile   the explosion
  */
 private fun drawMissile(canvas: Canvas, missile: Missile) {
+    // TODO: Lets make this a little more appealing
     canvas.drawLine(
         missile.start.x.toInt(),
         missile.start.y.toInt(),

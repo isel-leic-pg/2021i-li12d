@@ -2,6 +2,8 @@ import pt.isel.canvas.RED
 import kotlin.math.pow
 import kotlin.math.sqrt
 
+const val FOE_MISSILE_VELOCITY_MAGNITUDE = 1.5
+
 /**
  * Represents enemy missiles.
  *
@@ -25,8 +27,9 @@ data class Missile(
  * @return the normalized vector expressed as a [Velocity]
  */
 private fun computeNormalizedVelocity(start: Location, end: Location): Velocity {
-    val magnitude = sqrt(start.x.pow(2) + start.y.pow(2))
-    return Velocity((end.x - start.x) / magnitude, (end.y - start.y) / magnitude)
+    val vector = Location(end.x - start.x, end.y - start.y)
+    val magnitude = sqrt(vector.x.pow(2) + vector.y.pow(2))
+    return Velocity(vector.x / magnitude, vector.y / magnitude)
 }
 
 /**
@@ -35,12 +38,14 @@ private fun computeNormalizedVelocity(start: Location, end: Location): Velocity 
  * @param worldHeight   The width of the world
  * @param worldHeight   The height of the world
  * @param dmzMargin     The width of the demilitarized zone (where no missiles will fall)
+ * @param magnitude     The magnitude of the missile's velocity vector
  * @return the newly created missile
  */
-fun createMissile(worldWidth: Int, worldHeight: Int, dmzMargin: Int): Missile {
+fun createMissile(worldWidth: Int, worldHeight: Int, dmzMargin: Int, magnitude: Double): Missile {
     val entry = Location((dmzMargin .. worldWidth - dmzMargin).random().toDouble(), 0.0)
     val target = Location((dmzMargin .. worldWidth - dmzMargin).random().toDouble(), worldHeight.toDouble())
-    return Missile(entry, entry, computeNormalizedVelocity(entry, target))
+    val normalized = computeNormalizedVelocity(entry, target)
+    return Missile(entry, entry, Velocity(normalized.dx * magnitude, normalized.dy * magnitude))
 }
 
 /**

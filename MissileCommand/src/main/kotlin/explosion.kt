@@ -1,18 +1,19 @@
 import pt.isel.canvas.WHITE
 
 const val MIN_RADIUS = 5.0
-const val MAX_RADIUS = 50.0
+const val MAX_RADIUS = 40.0
 
-const val GROWTH_RATE = 1.03
-const val SHRINK_RATE = 0.97
+const val GROWTH_RATE = 1.05
+const val SHRINK_RATE = 0.93
+
+
+// TODO: (8) Explosion color sequence should be branco, amarelo, magenta, vermelho, cyan, verde, azul escuro, preto
 
 /**
  * Represents explosions at a given time instant.
  *
- * TODO: Explosion color sequence is: branco, amarelo, magenta, vermelho, cyan, verde, azul escuro, preto
- *
  * @property center     the explosion's center
- * @property radius     the eplosion's current radius
+ * @property radius     the explosion's current radius
  * @property rate       the explosion's changing rate (i.e. >= 1.0, it is growing)
  * @property color      the explosion's color
  */
@@ -66,10 +67,12 @@ private fun expandUntil(explosion: Explosion, maxRadius: Double): Explosion {
 /**
  * Conditionally contracts the explosion if it hasn't reached the maximum radius
  *
- * @param explosion the explosion to be tentatively contracts
+ * @param explosion the explosion to be tentatively contracted
+ * @param minRadius the minimum radius
  * @return the new explosion if the minimum radius has not yet been reached.
  */
-private fun contractUntilZero(explosion: Explosion) = maybeApplyExplosionRate(explosion) { it.radius > 0 }
+private fun contractUntil(explosion: Explosion, minRadius: Double) =
+        maybeApplyExplosionRate(explosion) { it.radius > minRadius }
 
 /**
  * Reverts the given explosion's rate, that is, it is expanding and we make it contract.
@@ -81,19 +84,21 @@ private fun revertExplosionRate(explosion: Explosion) =
         Explosion(explosion.center, explosion.radius, SHRINK_RATE, explosion.color)
 
 /**
- * Makes the explosion evolve, if it exists.
+ * Makes the explosion evolve, if it exists. Explosions evolve by expanding until they reach the maximum radius. Once
+ * that radius is reached, they start to contract until they reach their minimum radius. After that, they disappear.
  *
  * @param explosion the explosion, if it exists
- * @return the new evolved explosion, or null
+ * @return the new evolved explosion, or null if it disappeared
  */
 fun evolveExplosion(explosion: Explosion?): Explosion? {
 
     val newExplosion = when {
         explosion == null -> null
         explosion.rate == GROWTH_RATE -> expandUntil(explosion, MAX_RADIUS)
-        else -> contractUntilZero(explosion)
+        else -> contractUntil(explosion, MIN_RADIUS)
     }
 
+    // TODO: (5) Remove explosion if its radius is less than MIN_RADIUS
     return if (newExplosion == null || newExplosion != explosion) newExplosion
     else revertExplosionRate(newExplosion)
 }

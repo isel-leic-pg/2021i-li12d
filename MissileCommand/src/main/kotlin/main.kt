@@ -1,36 +1,17 @@
 import pt.isel.canvas.*
 
-const val MARGIN = 50
-
+/**
+ * Implementation of Atari's Missile Command
+ * Inspiration source: https://games.aarp.org/games/atari-missile-command
+ */
 fun main() {
 
-    /*
-    val values: List<Int> = listOf(5, 3, 2, 8, 3)
-
-    println("values = $values")
-    println("evenValues = ${values.filter { it % 2 == 0 }}")
-    println("oddValues = ${values.filter { it % 2 != 0 }}")
-    println("positiveValues = ${values.filter { it >= 0 }}")
-    println("doubledValues = ${values.map { it * 2 }}")
-
-    val evenValues: List<Int> = values.filter { it % 2 == 0 }
-    val doubledEvenValues: List<Int> = evenValues.map { it * 2 }
-
-    println("doubledEvenValues = $doubledEvenValues")
-    println("doubledOddValues = ${values.filter { it % 2 != 0 }.map { it * 2 }}")
-    println("doubledDoubledValues = ${values.map { it * 2 }.map { it * 2 }}")
-     */
-
     onStart {
-        val canvas = Canvas(WORLD_WIDTH, WORLD_HEIGHT, BLACK)
-        val missiles: List<Missile> = listOf(
-                createMissile(WORLD_WIDTH, WORLD_HEIGHT, MARGIN),
-                createMissile(WORLD_WIDTH, WORLD_HEIGHT, MARGIN),
-                createMissile(WORLD_WIDTH, WORLD_HEIGHT, MARGIN)
-        )
-        var world = World(missiles)
+        var world = initializeWorld()
+        val canvas = Canvas(world.width, world.height, BLACK)
 
         canvas.onMouseDown {
+            // TODO: (9) Instead of instantly adding an explosion to the world, we should instead add a defender missile
             world = addExplosionToWorld(world, Location(it.x.toDouble(), it.y.toDouble()))
         }
 
