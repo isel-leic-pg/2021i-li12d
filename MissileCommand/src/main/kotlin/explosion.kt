@@ -65,7 +65,7 @@ private fun expandUntil(explosion: Explosion, maxRadius: Double): Explosion {
 }
 
 /**
- * Conditionally contracts the explosion if it hasn't reached the maximum radius
+ * Conditionally contracts the explosion if it hasn't reached the minimum radius yet.
  *
  * @param explosion the explosion to be tentatively contracted
  * @param minRadius the minimum radius
@@ -98,8 +98,10 @@ fun evolveExplosion(explosion: Explosion?): Explosion? {
         else -> contractUntil(explosion, MIN_RADIUS)
     }
 
-    // TODO: (5) Remove explosion if its radius is less than MIN_RADIUS
-    return if (newExplosion == null || newExplosion != explosion) newExplosion
-    else revertExplosionRate(newExplosion)
+    return when {
+        newExplosion == null || newExplosion.radius <= MIN_RADIUS -> null
+        newExplosion != explosion -> newExplosion
+        else -> revertExplosionRate(newExplosion)
+    }
 }
 
