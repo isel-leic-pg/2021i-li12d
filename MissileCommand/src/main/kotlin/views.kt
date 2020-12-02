@@ -7,9 +7,8 @@ import pt.isel.canvas.Canvas
  */
 fun drawWorld(canvas: Canvas, world: World) {
     canvas.erase()
-    if (world.explosion != null)
-        drawExplosion(canvas, world.explosion)
 
+    world.explosions.forEach { drawExplosion(canvas, it) }
     world.missiles.forEach { drawMissile(canvas, it) }
 }
 

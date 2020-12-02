@@ -10,8 +10,7 @@ data class World(
         val width: Int = WORLD_WIDTH,
         val height: Int = WORLD_HEIGHT,
         val missiles: List<Missile> = listOf(),
-        // TODO: (6) The world will support multiple explosions
-        val explosion: Explosion? = null
+        val explosions: List<Explosion> = listOf()
 )
 
 fun initializeWorld(): World {
@@ -30,18 +29,45 @@ fun initializeWorld(): World {
  * @param location  the location of the new explosion
  * @return the new world instance
  */
-fun addExplosionToWorld(world: World, location: Location) = World(world.width, world.height, world.missiles, Explosion(location))
+fun addExplosionToWorld(world: World, location: Location) =
+        World(world.width, world.height, world.missiles, world.explosions + Explosion(location))
 
-fun computeNextMissiles(missiles: List<Missile>, explosion: Explosion?): List<Missile> {
-    return missiles.filter { !detectCollision(explosion, it) }.map { moveMissile(it) }
+/**
+ * Computes the list of missiles that were destroyed by any of the explosions.
+ *
+ * @param missiles      the current list of missiles
+ * @param explosions    the explosions to consider
+ * @return the surviving missiles.
+ */
+fun computeNextMissiles(missiles: List<Missile>, explosions: List<Explosion>): List<Missile> {
+    return missiles.filter { !detectCollision(explosions, it) }.map { moveMissile(it) }
+}
+
+/**
+ * Verifies if any of the given explosions destroys the missile.
+ *
+ * @param explosions    the explosions to consider
+ * @param missile       the missile
+ * @return a boolean value to indicate if the [missile] was destroyed or not by any of the explosions in [explosions]
+ */
+fun detectCollision(explosions: List<Explosion>, missile: Missile): Boolean {
+    /*val hits: List<Explosion> = explosions.filter { detectCollision(it, missile) }
+    return hits.size != 0*/
+    return explosions.any { detectCollision(it, missile) }
 }
 
 // TODO: (7) Change implementation so that missiles are only destroyed by expanding explosions
 // Add isExpanding(explosion): Boolean to explosion.kt
-fun detectCollision(explosion: Explosion?, missile: Missile) =
-    if (explosion != null)
+
+/**
+ * Verifies if the given explosion destroys the given missile.
+ *
+ * @param explosion the explosion to consider
+ * @param missile   the missile
+ * @return a boolean value to indicate if the [missile] was destroyed or not by [explosion]
+ */
+fun detectCollision(explosion: Explosion, missile: Missile) =
         distance(explosion.center, missile.current) < explosion.radius
-    else false
 
 /**
  * Computes the new world based on the given one.
@@ -50,9 +76,7 @@ fun detectCollision(explosion: Explosion?, missile: Missile) =
  * @return The new [World] instance
  */
 fun computeNextWorld(world: World): World {
-
-    val newExplosion: Explosion? = evolveExplosion(world.explosion)
-    val newMissiles: List<Missile> = computeNextMissiles(world.missiles, world.explosion)
-
-    return World(world.width, world.height, newMissiles, newExplosion)
+    val newExplosions: List<Explosion> = world.explosions.mapNotNull { evolveExplosion(it) }
+    val newMissiles: List<Missile> = computeNextMissiles(world.missiles, world.explosions)
+    return World(world.width, world.height, newMissiles, newExplosions)
 }

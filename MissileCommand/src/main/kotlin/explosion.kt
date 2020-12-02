@@ -60,7 +60,7 @@ private fun maybeApplyExplosionRate(explosion: Explosion, predicate: Predicate) 
  * @return the new explosion if the maximum radius hasn't yet been reached.
  */
 private fun expandUntil(explosion: Explosion, maxRadius: Double): Explosion {
-    val condition: Predicate = { explosion: Explosion -> explosion.radius < maxRadius }
+    val condition: Predicate = { thExplosion: Explosion -> thExplosion.radius < maxRadius }
     return maybeApplyExplosionRate(explosion, condition)
 }
 
