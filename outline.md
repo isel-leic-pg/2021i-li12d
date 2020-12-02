@@ -133,6 +133,9 @@ For reference:
 ### 16/11/2020 - Coding session (subjects' review)
 * Review of the most important subjects thusfar
 
+For reference:
+* [Lecture video (in Portuguese)](https://www.youtube.com/watch?v=KOMjwYPTgho&list=PL8XxoCaL3dBgXjxTLx4Fm-uxTD8k-cXQA&index=10)
+
 ### 18/11/2020 - Kotlin type's system, revisited
 * [Nullable types](https://kotlinlang.org/docs/reference/null-safety.html)
   * Motivation and consequences
@@ -160,7 +163,16 @@ For reference:
   * Motivation
   * Properties
 * Expressing repetition through internal iteration: `forEach`
-* List transformation operations: `filter`, `map`, `reduce` and `fold`
+* List transformation operations: `filter` and `map`
  
 For reference:
-* [Lecture video (in Portuguese)](#25112020---collections-imutable-lists)
+* [Lecture video (in Portuguese)](https://www.youtube.com/watch?v=15RnUEbyDKE&list=PL8XxoCaL3dBgXjxTLx4Fm-uxTD8k-cXQA&index=13)
+
+### 02/12/2020 - Coding session
+* Review of the most important subjects thusfar
+* Imutable lists, continued
+  * Expanding lists: operator `+`
+  * List transformation operations:`any`, `filterNotNull` and `mapNotNull`
+ 
+For reference:
+* [Lecture video (in Portuguese)](#02122020---coding-session)
