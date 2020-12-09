@@ -99,7 +99,7 @@ fun computeNextWorld(world: World): World {
     val nonExplodedMissiles = removeExplodedMissiles(world.missiles, world.explosions)
 
     val groundHitMissiles = nonExplodedMissiles.filter { it.current.y >= world.height - world.groundHeight }
-    val groundExplosions = groundHitMissiles.map { it: Missile -> Explosion(center = it.current) }
+    val groundExplosions = groundHitMissiles.map { Explosion(center = it.current) }
 
     return buildWorld(
         world,
@@ -107,15 +107,3 @@ fun computeNextWorld(world: World): World {
         explosions = evolvedExplosions + groundExplosions
     )
 }
-
-
-
-
-
-
-
-
-
-
-
-
