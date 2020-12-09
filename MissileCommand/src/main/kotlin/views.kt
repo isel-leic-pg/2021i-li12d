@@ -1,4 +1,5 @@
 import pt.isel.canvas.Canvas
+import pt.isel.canvas.GREEN
 import pt.isel.canvas.WHITE
 import kotlin.math.pow
 import kotlin.math.roundToInt
@@ -14,6 +15,7 @@ fun drawWorld(canvas: Canvas, world: World) {
 
     world.explosions.forEach { drawExplosion(canvas, it) }
     world.missiles.forEach { drawMissile(canvas, it) }
+    drawGround(canvas, world)
 }
 
 /**
@@ -58,3 +60,26 @@ private fun drawMissile(canvas: Canvas, missile: Missile) {
         1
     )
 }
+
+
+fun drawGround(canvas: Canvas, world: World) {
+    canvas.drawLine(
+        xFrom = 0,
+        yFrom = world.height - world.groundHeight,
+        xTo = world.width,
+        yTo = world.height - world.groundHeight,
+        GREEN,
+        4
+    )
+}
+
+
+
+
+
+
+
+
+
+
+

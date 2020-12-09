@@ -84,6 +84,13 @@ private fun revertExplosionRate(explosion: Explosion) =
         Explosion(explosion.center, explosion.radius, SHRINK_RATE, explosion.color)
 
 /**
+ * Verifies if the explosion is growing or not.
+ *
+ * @return true if the explosion is expanding, false otherwise
+ */
+fun isExpanding(explosion: Explosion) = explosion.rate == GROWTH_RATE
+
+/**
  * Makes the explosion evolve, if it exists. Explosions evolve by expanding until they reach the maximum radius. Once
  * that radius is reached, they start to contract until they reach their minimum radius. After that, they disappear.
  *
@@ -92,14 +99,16 @@ private fun revertExplosionRate(explosion: Explosion) =
  */
 fun evolveExplosion(explosion: Explosion?): Explosion? {
 
-    val newExplosion = when {
-        explosion == null -> null
-        explosion.rate == GROWTH_RATE -> expandUntil(explosion, MAX_RADIUS)
-        else -> contractUntil(explosion, MIN_RADIUS)
-    }
+    // Using imperative style flow control for demo purposes
+    if (explosion == null)
+        return null
+
+    val newExplosion =
+        if (isExpanding(explosion)) expandUntil(explosion, MAX_RADIUS)
+        else contractUntil(explosion, MIN_RADIUS)
 
     return when {
-        newExplosion == null || newExplosion.radius <= MIN_RADIUS -> null
+        newExplosion.radius <= MIN_RADIUS -> null
         newExplosion != explosion -> newExplosion
         else -> revertExplosionRate(newExplosion)
     }

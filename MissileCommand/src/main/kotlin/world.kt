@@ -2,6 +2,7 @@
 private const val WORLD_WIDTH = 800
 private const val WORLD_HEIGHT = 600
 private const val MARGIN = 50
+private const val GROUND_HEIGHT = 50
 
 /**
  * Representation of the game world.
@@ -9,11 +10,17 @@ private const val MARGIN = 50
 data class World(
         val width: Int = WORLD_WIDTH,
         val height: Int = WORLD_HEIGHT,
+        val groundHeight: Int = GROUND_HEIGHT,
         val missiles: List<Missile> = listOf(),
-        val explosions: List<Explosion> = listOf()
+        val explosions: List<Explosion> = listOf(),
 )
 
-fun initializeWorld(): World {
+/**
+ * Creates a new [World] instance.
+ *
+ * @return the new instance
+ */
+fun createWorld(): World {
     val missilesList: List<Missile> = listOf(
             createMissile(WORLD_WIDTH, WORLD_HEIGHT, MARGIN, FOE_MISSILE_VELOCITY_MAGNITUDE),
             createMissile(WORLD_WIDTH, WORLD_HEIGHT, MARGIN, FOE_MISSILE_VELOCITY_MAGNITUDE),
@@ -23,6 +30,22 @@ fun initializeWorld(): World {
 }
 
 /**
+ * Builds a new world instance from the given one.
+ *
+ * @param world the world instance
+ *
+ * @return the new world instance
+ */
+fun buildWorld(
+    world: World,
+    width: Int = world.width,
+    height: Int = world.height,
+    groundHeight: Int = world.groundHeight,
+    missiles: List<Missile> = world.missiles,
+    explosions: List<Explosion> = world.explosions) = World(width, height, groundHeight, missiles, explosions)
+
+
+/**
  * Adds the explosion to the world.
  *
  * @param world     the world instance
@@ -30,7 +53,7 @@ fun initializeWorld(): World {
  * @return the new world instance
  */
 fun addExplosionToWorld(world: World, location: Location) =
-        World(world.width, world.height, world.missiles, world.explosions + Explosion(location))
+        buildWorld(world, explosions = world.explosions + Explosion(location))
 
 /**
  * Computes the list of missiles that were destroyed by any of the explosions.
@@ -51,13 +74,8 @@ fun computeNextMissiles(missiles: List<Missile>, explosions: List<Explosion>): L
  * @return a boolean value to indicate if the [missile] was destroyed or not by any of the explosions in [explosions]
  */
 fun detectCollision(explosions: List<Explosion>, missile: Missile): Boolean {
-    /*val hits: List<Explosion> = explosions.filter { detectCollision(it, missile) }
-    return hits.size != 0*/
     return explosions.any { detectCollision(it, missile) }
 }
-
-// TODO: (1) Change implementation so that missiles are only destroyed by expanding explosions
-// Add isExpanding(explosion): Boolean to explosion.kt
 
 /**
  * Verifies if the given explosion destroys the given missile.
@@ -67,7 +85,7 @@ fun detectCollision(explosions: List<Explosion>, missile: Missile): Boolean {
  * @return a boolean value to indicate if the [missile] was destroyed or not by [explosion]
  */
 fun detectCollision(explosion: Explosion, missile: Missile) =
-        distance(explosion.center, missile.current) < explosion.radius
+    isExpanding(explosion) && distance(explosion.center, missile.current) < explosion.radius
 
 /**
  * Computes the new world based on the given one.
@@ -78,5 +96,5 @@ fun detectCollision(explosion: Explosion, missile: Missile) =
 fun computeNextWorld(world: World): World {
     val newExplosions: List<Explosion> = world.explosions.mapNotNull { evolveExplosion(it) }
     val newMissiles: List<Missile> = computeNextMissiles(world.missiles, world.explosions)
-    return World(world.width, world.height, newMissiles, newExplosions)
+    return buildWorld(world, missiles = newMissiles, explosions = newExplosions)
 }

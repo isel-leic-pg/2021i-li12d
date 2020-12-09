@@ -1,5 +1,6 @@
 import pt.isel.canvas.*
 
+
 /**
  * Implementation of Atari's Missile Command
  * Inspiration source: https://games.aarp.org/games/atari-missile-command
@@ -7,7 +8,7 @@ import pt.isel.canvas.*
 fun main() {
 
     onStart {
-        var world = initializeWorld()
+        var world = createWorld()
         val canvas = Canvas(world.width, world.height, BLACK)
 
         canvas.onMouseDown {
