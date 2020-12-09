@@ -56,7 +56,7 @@ fun detectCollision(explosions: List<Explosion>, missile: Missile): Boolean {
     return explosions.any { detectCollision(it, missile) }
 }
 
-// TODO: (7) Change implementation so that missiles are only destroyed by expanding explosions
+// TODO: (1) Change implementation so that missiles are only destroyed by expanding explosions
 // Add isExpanding(explosion): Boolean to explosion.kt
 
 /**

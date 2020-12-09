@@ -2,7 +2,7 @@ import pt.isel.canvas.RED
 import kotlin.math.pow
 import kotlin.math.sqrt
 
-const val FOE_MISSILE_VELOCITY_MAGNITUDE = 1.5
+const val FOE_MISSILE_VELOCITY_MAGNITUDE = 2.0
 
 /**
  * Represents enemy missiles.

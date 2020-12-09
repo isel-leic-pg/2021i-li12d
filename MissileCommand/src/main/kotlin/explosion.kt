@@ -1,13 +1,13 @@
 import pt.isel.canvas.WHITE
 
-const val MIN_RADIUS = 5.0
-const val MAX_RADIUS = 40.0
+const val MIN_RADIUS = 6.0
+const val MAX_RADIUS = 36.0
 
-const val GROWTH_RATE = 1.05
-const val SHRINK_RATE = 0.93
+const val GROWTH_RATE = 1.06
+const val SHRINK_RATE = 0.94
 
 
-// TODO: (8) Explosion color sequence should be branco, amarelo, magenta, vermelho, cyan, verde, azul escuro, preto
+// TODO: (4) Explosion color sequence should be branco, amarelo, magenta, vermelho, cyan, verde, azul escuro, preto
 
 /**
  * Represents explosions at a given time instant.
