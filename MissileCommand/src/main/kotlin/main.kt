@@ -17,7 +17,6 @@ fun main() {
         }
 
         canvas.onTimeProgress(period = 25) {
-            // TODO: (2) Missiles should explode once they reach the ground
             world = computeNextWorld(world)
             drawWorld(canvas, world)
         }

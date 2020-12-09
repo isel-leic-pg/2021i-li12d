@@ -58,11 +58,11 @@ fun addExplosionToWorld(world: World, location: Location) =
 /**
  * Computes the list of missiles that were destroyed by any of the explosions.
  *
- * @param missiles      the current list of missiles
+ * @param missiles      the current list of attacking missiles
  * @param explosions    the explosions to consider
  * @return the surviving missiles.
  */
-fun computeNextMissiles(missiles: List<Missile>, explosions: List<Explosion>): List<Missile> {
+fun removeExplodedMissiles(missiles: List<Missile>, explosions: List<Explosion>): List<Missile> {
     return missiles.filter { !detectCollision(explosions, it) }.map { moveMissile(it) }
 }
 
@@ -94,7 +94,28 @@ fun detectCollision(explosion: Explosion, missile: Missile) =
  * @return The new [World] instance
  */
 fun computeNextWorld(world: World): World {
-    val newExplosions: List<Explosion> = world.explosions.mapNotNull { evolveExplosion(it) }
-    val newMissiles: List<Missile> = computeNextMissiles(world.missiles, world.explosions)
-    return buildWorld(world, missiles = newMissiles, explosions = newExplosions)
+
+    val evolvedExplosions = world.explosions.mapNotNull { evolveExplosion(it) }
+    val nonExplodedMissiles = removeExplodedMissiles(world.missiles, world.explosions)
+
+    val groundHitMissiles = nonExplodedMissiles.filter { it.current.y >= world.height - world.groundHeight }
+    val groundExplosions = groundHitMissiles.map { it: Missile -> Explosion(center = it.current) }
+
+    return buildWorld(
+        world,
+        missiles = nonExplodedMissiles - groundHitMissiles,
+        explosions = evolvedExplosions + groundExplosions
+    )
 }
+
+
+
+
+
+
+
+
+
+
+
+

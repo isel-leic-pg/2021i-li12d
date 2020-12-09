@@ -12,10 +12,10 @@ import kotlin.math.sqrt
  */
 fun drawWorld(canvas: Canvas, world: World) {
     canvas.erase()
+    drawGround(canvas, world)
 
     world.explosions.forEach { drawExplosion(canvas, it) }
     world.missiles.forEach { drawMissile(canvas, it) }
-    drawGround(canvas, world)
 }
 
 /**
