@@ -12,7 +12,7 @@ fun main() {
         val canvas = Canvas(world.width, world.height, BLACK)
 
         canvas.onMouseDown {
-            // TODO: (3) Instead of instantly adding an explosion to the world, we should instead add a defender missile
+            // TODO: (1) Instead of instantly adding an explosion to the world, we should instead add a defender missile
             world = addExplosionToWorld(world, Location(it.x.toDouble(), it.y.toDouble()))
         }
 
