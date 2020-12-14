@@ -175,4 +175,30 @@ For reference:
   * List transformation operations:`any`, `filterNotNull` and `mapNotNull`
  
 For reference:
-* [Lecture video (in Portuguese)](#02122020---coding-session)
+* [Lecture video (in Portuguese)](https://www.youtube.com/watch?v=Z37Btp4eEvM&list=PL8XxoCaL3dBgXjxTLx4Fm-uxTD8k-cXQA&index=14)
+
+### 09/12/2020 - Coding session
+* Execution, revisited 
+  * Expressions vs instructions
+    * `if else` expression and instruction
+    * `if` instruction
+* Imutable lists, continued
+  * Operator `-`
+
+For reference:
+* [Lecture video (in Portuguese)](https://www.youtube.com/watch?v=u7Iu_il6DWY&list=PL8XxoCaL3dBgXjxTLx4Fm-uxTD8k-cXQA&index=15)
+
+### 14/12/2020 - Evaluation
+* Realization of the second individual evaluation form
+
+### 16/12/2020 - Lists and functions, continued (preview)
+* Immutable lists, continued
+  * Reduction operations: `reduce` and `fold`
+* Functions, continued
+  * [Extension functions](https://kotlinlang.org/docs/reference/extensions.html)
+  * [Operator overload](https://kotlinlang.org/docs/reference/operator-overloading.html)
+* Coding session: Improving the Missile Command code base
+
+For reference:
+* [Lecture video (in Portuguese)](#16122020---lists-and-functions-continued-preview)
+* [Design smell: Primitive obsession](https://blog.ploeh.dk/2011/05/25/DesignSmellPrimitiveObsession/)
