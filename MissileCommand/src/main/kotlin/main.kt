@@ -1,5 +1,7 @@
-import pt.isel.canvas.*
-
+import pt.isel.canvas.BLACK
+import pt.isel.canvas.Canvas
+import pt.isel.canvas.onFinish
+import pt.isel.canvas.onStart
 
 /**
  * Implementation of Atari's Missile Command
