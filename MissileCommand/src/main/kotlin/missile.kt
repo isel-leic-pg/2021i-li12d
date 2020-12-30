@@ -1,36 +1,25 @@
+import pt.isel.canvas.GREEN
 import pt.isel.canvas.RED
-import kotlin.math.pow
-import kotlin.math.sqrt
 
-const val FOE_MISSILE_VELOCITY_MAGNITUDE = 2.0
+const val FOE_MISSILE_VELOCITY_MAGNITUDE = 1.6
+const val DEFENDER_MISSILE_VELOCITY_MAGNITUDE = 10.0
 
 /**
  * Represents enemy missiles.
  *
- * @property start      The location where the missile entered the arena
+ * @property origin     The location from where the missile was launched
+ * @property target     The location to where the missile is headed
  * @property current    The missile's current location
  * @property velocity   The missile's velocity
  * @property color      The missile's color
  */
 data class Missile(
-        val start: Location,
+        val origin: Location,
+        val target: Location,
         val current: Location,
         val velocity: Velocity = Velocity(0.0, 0.0),
-        val color: Int = RED
+        val color: Int
 )
-
-/**
- * Computes the normalized vector specified by the difference between [start] and [end].
- *
- * @param start the start point
- * @param end   the end point
- * @return the normalized vector expressed as a [Velocity]
- */
-private fun computeNormalizedVelocity(start: Location, end: Location): Velocity {
-    val vector = Location(end.x - start.x, end.y - start.y)
-    val magnitude = sqrt(vector.x.pow(2) + vector.y.pow(2))
-    return Velocity(vector.x / magnitude, vector.y / magnitude)
-}
 
 /**
  * Creates a new missile with the specified constraints
@@ -42,11 +31,21 @@ private fun computeNormalizedVelocity(start: Location, end: Location): Velocity 
  * @return the newly created missile
  */
 fun createMissile(worldWidth: Int, worldHeight: Int, dmzMargin: Int, magnitude: Double): Missile {
-    val entry = Location((dmzMargin .. worldWidth - dmzMargin).random().toDouble(), 0.0)
-    val target = Location((dmzMargin .. worldWidth - dmzMargin).random().toDouble(), worldHeight.toDouble())
-    val normalized = computeNormalizedVelocity(entry, target)
-    return Missile(entry, entry, Velocity(normalized.dx * magnitude, normalized.dy * magnitude))
+    val entry = Vector2D((dmzMargin .. worldWidth - dmzMargin).random().toDouble(), 0.0)
+    val target = Vector2D((dmzMargin .. worldWidth - dmzMargin).random().toDouble(), worldHeight.toDouble())
+    val velocity = ((target - entry).norm() * magnitude).toVelocity()
+    return Missile(entry.toLocation(), target.toLocation(), entry.toLocation(), velocity, RED)
 }
+
+/**
+ * Cretaes a new defender missile with the given properties
+ *
+ * @param origin    the missile origin (i.e. to location from where it was fired)
+ * @param target    the missile's target (i.e. to location to which it was fired)
+ * @param magnitude The magnitude of the missile's velocity vector
+ */
+fun createDefenderMissile(origin: Location, target: Location, magnitude: Double) =
+    Missile(origin, target, origin, ((target.toVector() - origin.toVector()).norm() * magnitude).toVelocity(), GREEN)
 
 /**
  * Moves the given missile.
@@ -55,7 +54,19 @@ fun createMissile(worldWidth: Int, worldHeight: Int, dmzMargin: Int, magnitude: 
  * @return the new missile instance.
  */
 fun moveMissile(missile: Missile) = Missile(
-        missile.start,
+        missile.origin,
+        missile.target,
         add(missile.current, missile.velocity),
-        missile.velocity
+        missile.velocity,
+        missile.color
 )
+
+/**
+ * Checks whether the given missile has reached its target.
+ *
+ * @param missile   the missile to be checked
+ * @return a boolean value indicating whether the missile has reched its target or not
+ */
+fun hasReachedTarget(missile: Missile) =
+    if (missile.velocity.dy > 0) missile.current.y >= missile.target.y
+    else missile.current.y <= missile.target.y

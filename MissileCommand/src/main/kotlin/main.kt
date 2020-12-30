@@ -10,12 +10,23 @@ import pt.isel.canvas.onStart
 fun main() {
 
     onStart {
-        var world = createWorld()
+        var world = World()
         val canvas = Canvas(world.width, world.height, BLACK)
 
+        val groundDmz = world.height - (world.groundHeight + MAX_RADIUS)
         canvas.onMouseDown {
-            // TODO: (1) Instead of instantly adding an explosion to the world, we should instead add a defender missile
-            world = addExplosionToWorld(world, Location(it.x.toDouble(), it.y.toDouble()))
+            if (it.y < groundDmz) {
+                val firedMissile = createDefenderMissile(
+                    origin = Location(world.width / 2.0, (world.height - world.groundHeight).toDouble()),
+                    target = Location(it.x.toDouble(), it.y.toDouble()),
+                    DEFENDER_MISSILE_VELOCITY_MAGNITUDE
+                )
+                world = world.build(defenderMissiles =  world.defenderMissiles + firedMissile)
+            }
+        }
+
+        canvas.onTimeProgress(1500) {
+            world = addMissileToWorld(world)
         }
 
         canvas.onTimeProgress(period = 25) {
@@ -28,3 +39,4 @@ fun main() {
         println("Bye bye!")
     }
 }
+

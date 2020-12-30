@@ -1,9 +1,10 @@
 import pt.isel.canvas.Canvas
 import pt.isel.canvas.GREEN
 import pt.isel.canvas.WHITE
-import kotlin.math.pow
 import kotlin.math.roundToInt
-import kotlin.math.sqrt
+
+const val MISSILE_LENGTH = 12.0
+const val MISSILE_TRAIL_LENGTH = 120.0
 
 /**
  * Draws the world.
@@ -16,6 +17,7 @@ fun drawWorld(canvas: Canvas, world: World) {
 
     world.explosions.forEach { drawExplosion(canvas, it) }
     world.missiles.forEach { drawMissile(canvas, it) }
+    world.defenderMissiles.forEach { drawMissile(canvas, it) }
 }
 
 /**
@@ -34,34 +36,51 @@ private fun drawExplosion(canvas: Canvas, explosion: Explosion) {
 
 /**
  * Draws a missile.
- * @param canvas    the canvas where the explosion is to be drawn
- * @param missile   the explosion
+ * @param canvas    the canvas where the missile is to be drawn
+ * @param missile   the missile
  */
 private fun drawMissile(canvas: Canvas, missile: Missile) {
 
-    val magnitude = sqrt(missile.velocity.dx.pow(2) + missile.velocity.dy.pow(2))
-    val missileSize = 12
+    val missileVectorNorm = missile.velocity.toVector().norm()
+
+    val missileVectorView = missileVectorNorm * MISSILE_LENGTH
+    val missileStart = Location(missile.current.x, missile.current.y)
+    val missileEnd = (missileStart.toVector() - missileVectorView).toLocation()
+
     canvas.drawLine(
-        (missile.current.x - missileSize * (missile.velocity.dx / magnitude)).roundToInt(),
-        (missile.current.y - missileSize * (missile.velocity.dy / magnitude)).roundToInt(),
-        missile.current.x.roundToInt(),
-        missile.current.y.roundToInt(),
+        missileStart.x.roundToInt(),
+        missileStart.y.roundToInt(),
+        missileEnd.x.roundToInt(),
+        missileEnd.y.roundToInt(),
         WHITE,
         3
     )
 
-    val trailSize = 120
+    val missileTrailVector = missileVectorNorm * MISSILE_TRAIL_LENGTH
+    val projectedTrailEnd = missileEnd.toVector() - missileTrailVector
+
+    val distanceToOrigin = (missileEnd.toVector() - missile.origin.toVector()).magnitude()
+    val distanceToTrailEnd = (missileEnd.toVector() - projectedTrailEnd).magnitude()
+
+    val trailEnd =
+        if (distanceToTrailEnd < distanceToOrigin) projectedTrailEnd.toLocation()
+        else missile.origin
+
     canvas.drawLine(
-        (missile.current.x - trailSize * (missile.velocity.dx / magnitude)).roundToInt(),
-        (missile.current.y - trailSize * (missile.velocity.dy / magnitude)).roundToInt(),
-        (missile.current.x - missileSize * (missile.velocity.dx / magnitude)).roundToInt(),
-        (missile.current.y - missileSize * (missile.velocity.dy / magnitude)).roundToInt(),
+        missileEnd.x.roundToInt(),
+        missileEnd.y.roundToInt(),
+        trailEnd.x.roundToInt(),
+        trailEnd.y.roundToInt(),
         missile.color,
         1
     )
 }
 
-
+/**
+ * Draws the ground.
+ * @param canvas    the canvas where the ground is to be drawn
+ * @param world     the world instance
+ */
 fun drawGround(canvas: Canvas, world: World) {
     canvas.drawLine(
         xFrom = 0,
