@@ -200,5 +200,5 @@ For reference:
 * Coding session: Improving the Missile Command code base
 
 For reference:
-* [Lecture video (in Portuguese)](#16122020---lists-and-functions-continued-preview)
+* [Lecture video (in Portuguese)](https://www.youtube.com/watch?v=HANI7K7Qeg4&list=PL8XxoCaL3dBgXjxTLx4Fm-uxTD8k-cXQA&index=16)
 * [Design smell: Primitive obsession](https://blog.ploeh.dk/2011/05/25/DesignSmellPrimitiveObsession/)
