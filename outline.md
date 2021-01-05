@@ -202,3 +202,17 @@ For reference:
 For reference:
 * [Lecture video (in Portuguese)](https://www.youtube.com/watch?v=HANI7K7Qeg4&list=PL8XxoCaL3dBgXjxTLx4Fm-uxTD8k-cXQA&index=16)
 * [Design smell: Primitive obsession](https://blog.ploeh.dk/2011/05/25/DesignSmellPrimitiveObsession/)
+
+### 04/01/2021 - Immutability and mutability
+* Using imutable data representations
+  * Motivation and consequences
+  * Demistifying the actual cost of immutability
+  * Observation of memory consumption using [VisualVM](https://visualvm.github.io/download.html)
+  * Notion of peak usage and working set
+* Using mutable data representations
+  * Motivation and consequences
+  * A small incursion into the imperative programming style
+
+For reference:
+* [Lecture video (in Portuguese)](#04012021---immutability-and-mutability)
+* [Immutability we can afford](https://elizarov.medium.com/immutability-we-can-afford-10c0dcb8351d)
