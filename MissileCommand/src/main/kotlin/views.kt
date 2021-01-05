@@ -6,15 +6,35 @@ import kotlin.math.roundToInt
 const val MISSILE_LENGTH = 12.0
 const val MISSILE_TRAIL_LENGTH = 120.0
 
+
+fun drawGame(canvas: Canvas, game: Game) {
+    canvas.erase()
+    drawWorld(canvas, game.world)
+
+    val modeText = when {
+        game.mode == Mode.PLAYING -> "REC"
+        game.replayInfo?.mode == ReplayMode.FORWARD -> "\u25B6"
+        game.replayInfo?.mode == ReplayMode.BACKWARD -> "\u25C0"
+        else -> ""
+    }
+
+    canvas.drawText(
+        game.world.width - 100,
+        game.world.height - game.world.groundHeight / 3,
+        modeText,
+        GREEN,
+        24
+    )
+}
+
 /**
  * Draws the world.
  * @param canvas    the canvas where the world is to be drawn
  * @param world     the world
  */
 fun drawWorld(canvas: Canvas, world: World) {
-    canvas.erase()
-    drawGround(canvas, world)
 
+    drawGround(canvas, world)
     world.explosions.forEach { drawExplosion(canvas, it) }
     world.missiles.forEach { drawMissile(canvas, it) }
     world.defenderMissiles.forEach { drawMissile(canvas, it) }
