@@ -40,9 +40,5 @@ fun main() {
 
     val array = arrayOf(10, 20, 30)
     val anotherArray = Array<Int>(1000) { idx -> idx }
-    array[0]
-    array[1]
-    array[2]
-    array[999]
     println(array)
 }

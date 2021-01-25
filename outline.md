@@ -214,5 +214,39 @@ For reference:
   * A small incursion into the imperative programming style
 
 For reference:
-* [Lecture video (in Portuguese)](#04012021---immutability-and-mutability)
+* [Lecture video (in Portuguese)](https://www.youtube.com/watch?v=EyDzP8HNUAI&list=PL8XxoCaL3dBgXjxTLx4Fm-uxTD8k-cXQA&index=17)
 * [Immutability we can afford](https://elizarov.medium.com/immutability-we-can-afford-10c0dcb8351d)
+
+### 06/01/2021 - Practical class
+* Practical class dedicated to the assesment of the second project assignment (the requirements are [here](assets/trab2Pg2021.pdf), in Portuguese)
+
+### 11/01/2021 - The imperative style
+* The imperative style
+  * Main traits: mutations and state machines
+  * Motivation and consequences of its use
+* Support in Kotlin
+  * Execution control
+    * Selection
+    * Repetition
+  * `var`qualifier used in local values (a.k.a. local variables)
+* Exercises
+
+For reference:
+* [Lecture video (in Portuguese)](https://www.youtube.com/watch?v=D5IAjjjyw7A&list=PL8XxoCaL3dBgXjxTLx4Fm-uxTD8k-cXQA&index=18)
+  
+### 13/01/2021 - Practical class
+* Practical class dedicated to the development of the third project assignment (the requirements are [here](assets/trab3Pg2021.pdf), in Portuguese)
+
+### 18/01/2021 - The imperative style, continued
+* Mutable lists and immutable lists 
+* Exercises
+
+For reference:
+* [Lecture video (in Portuguese)](https://www.youtube.com/watch?v=YQDXHQuuSfk&list=PL8XxoCaL3dBgXjxTLx4Fm-uxTD8k-cXQA&index=19)
+
+### 20/01/2021 - Conclusion
+* Overview of the studied subjects 
+* Looking ahead to the next programming subjects addressed in LEIC curricular programme
+
+For reference:
+* [Lecture video (in Portuguese)](#20012021---conclusion)
